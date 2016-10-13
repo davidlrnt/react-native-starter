@@ -41,7 +41,7 @@ class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <ImagesList images={this.props.fetch.data}/>
+        <ImagesList data={this.props.fetch.data}/>
         <Button _onPressButton={this.testPress} text="Fetch Data" color="#575D67"/>
       </View>
     )
