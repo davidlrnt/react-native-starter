@@ -1,64 +1,18 @@
 'use strict'
 
-const youtubeApiKey = '<YOUR_YOUTUBE_API_HERE>'
-const youtubeApiBaseUrl = 'https://www.googleapis.com/youtube/v3'
-
-export const SET_SEARCH_KEYWORD = 'SET_SEARCH_KEYWORD'
-export const SEARCH_STARTED = 'SEARCH_STARTED'
-export const SEARCH_RESULT = 'SEARCH_RESULT'
-export const SEARCH_FAILED = 'SEARCH_FAILED'
-export const MORE_SEARCH_RESULT = 'MORE_SEARCH_RESULT'
-export const NEW_SEARCH = 'NEW_SEARCH'
 export const FETCH_DATA = 'FETCH_DATA'
 export const FETCH_DATA_SUCCEEDED = 'FETCH_DATA_SUCCEEDED'
 export const FETCH_DATA_FAILED = 'FETCH_DATA_FAILED'
 
-export const newSearch = () => ({type: NEW_SEARCH})
-export const setSearchKeyword = (keyword) => ({type: SET_SEARCH_KEYWORD, keyword})
-export const runSearch = (keyword) => (dispatch) => _searchVideos(dispatch, keyword)
-export const moreVideos = (keyword, nextPageToken) => (dispatch) => _searchVideos(dispatch, keyword, nextPageToken)
 export const fetchData = (url) => ({type: FETCH_DATA, url})
-const _searchVideos = (dispatch, keyword, nextPageToken = null) => {
-  dispatch(_searchStarted(keyword))
 
-  const encodedKeyword = keyword.replace(' ', '+')
-  let url = `${youtubeApiBaseUrl}/search?part=snippet&q=${encodedKeyword}&type=video&maxResults=10&key=${youtubeApiKey}`
-  if (nextPageToken) {
-    url += `&pageToken=${nextPageToken}`
-  }
-
-  return fetch(url)
-    .then((resp) => resp.json())
-    .then((data) => {
-      if (data.error) throw data.error.message || 'Unable to search'
-      return data
-    })
-    .then((data) => {
-      if (nextPageToken) {
-        dispatch(_moreSearchResultReceived(data))
-      } else {
-        dispatch(_searchResultReceived(data))
-      }
-    })
-    .catch((err) => {
-      dispatch(_searchFailed(err))
-    })
-}
-const _searchStarted = (keyword) => ({type: SEARCH_STARTED, keyword})
-const _searchResultReceived = (data) => ({type: SEARCH_RESULT, data})
-const _moreSearchResultReceived = (data) => ({type: MORE_SEARCH_RESULT, data})
-const _searchFailed = (message) => ({type: SEARCH_FAILED, message})
-
-
-export function saveScoreSucceeded (data) {
-  console.log("INSIDE ACTIONS SUCCESS", data);
+export function fetchDataSucceeded (data) {
   return {
     type: FETCH_DATA_SUCCEEDED,
     data
   }
 }
-export function saveScoreFailed (err) {
-  console.log("INSIDE ACTIONS FAIL", err);
+export function fetchDataFailed (err) {
   return {
     type: FETCH_DATA_FAILED,
     err

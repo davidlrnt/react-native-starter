@@ -3,16 +3,16 @@ import { call, put } from 'redux-saga/effects'
 import * as actions from './actions'
 import Api from './Api';
 
-const { saveScoreSucceeded, saveScoreFailed, FETCH_DATA } = actions
+const { fetchDataSucceeded, fetchDataFailed, FETCH_DATA } = actions
 
 export function* fetchAsync(action) {
   try {
     const apiData = yield call(Api.fetchData, action.url)
-    yield put(saveScoreSucceeded(apiData.results))
+    yield put(fetchDataSucceeded(apiData.results))
   }
   catch (err) {
     console.log("ERROR", err);
-    yield put (saveScoreFailed(err))
+    yield put (fetchDataFailed(err))
   }
 }
 
