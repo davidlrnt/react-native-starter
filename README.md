@@ -22,4 +22,4 @@ $ react-native run-android
 ## TO DOs
 
 - **Add Navigator Logic**
-Create Navigator Logic to abstract swictch between Scenes
+Create Navigator Logic to abstract switch between Scenes
