@@ -18,13 +18,20 @@ class ImagesList extends React.Component {
       <View style={styles.container}>
         {
           this.props.images.map((image, i) => {
-            if (i<10){
-              console.log(image);
-              return(
+            console.log(i);
+            if (i<20){
+              // return(
+              //   <Image
+              //     key={i}
+              //     style={styles.logo}
+              //     source={{uri: 'https://facebook.github.io/react/img/logo_og.png'}}
+              //   />                
+              // )
+              return (
                 <Image
-                  key={i}
-                  style={styles.logo}
-                  source={{uri: image.thumbnailUrl}} />
+                    key={i}
+                    style={styles.logo}
+                    source={{uri: image.media[0].tinygif.url}} />
               )
             }
           })
@@ -41,18 +48,21 @@ ImagesList.propTypes = {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
+    flexDirection: 'row',
     backgroundColor: '#F1F1F1',
+    flexWrap: 'wrap',
+    borderColor: "black",
+    borderWidth: 1,
     paddingTop: 100,
     paddingLeft: 20,
     paddingRight: 20,
     paddingBottom: 20
   },
   logo: {
-    width: 25,
-    height: 25,
+    width: 50,
+    height: 50,
     margin: 15,
-    alignSelf: 'center'
+    // alignSelf: 'center'
   },
   searchInput: {
     height: 60,

@@ -7,8 +7,8 @@ const { saveScoreSucceeded, saveScoreFailed, FETCH_DATA } = actions
 
 export function* fetchAsync(action) {
   try {
-    const products = yield call(Api.fetchData, action.url)
-    yield put(saveScoreSucceeded(products))
+    const apiData = yield call(Api.fetchData, action.url)
+    yield put(saveScoreSucceeded(apiData.results))
   }
   catch (err) {
     console.log("ERROR", err);

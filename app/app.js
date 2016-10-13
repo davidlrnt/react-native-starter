@@ -36,7 +36,7 @@ class App extends React.Component {
 
   testPress() {
     console.log("CLick");
-    this.props.fetchData("https://jsonplaceholder.typicode.com/photos")
+    this.props.fetchData("https://api.riffsy.com/v1/search?tag=cat")
   }
   render() {
     return (
