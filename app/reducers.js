@@ -1,6 +1,11 @@
 'use strict'
 
 import { combineReducers } from 'redux'
+import {
+  FETCH_DATA,
+  FETCH_DATA_SUCCEEDED,
+} from './actions'
+
 
 const initialFetchState = {
   data: []
